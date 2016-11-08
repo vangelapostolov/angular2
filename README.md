@@ -11,5 +11,5 @@ Task of Angular2
 - family - text
 - email - text
 - phone - text
-- address - textarea
+- address - textarea 
 Да се приложат и съответните валидации
