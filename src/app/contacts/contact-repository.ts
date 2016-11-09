@@ -1,66 +1,66 @@
-import { User } from './user.model';
+import { Contact } from './contact.model';
 
-interface ManageUser<T> {
-    (user: T): void;
+interface ManageContact<T> {
+    (contact: T): void;
 }
 
 export interface Repository<T> {
-    addUser: ManageUser<T>;
-    deleteUserById: (id: number) => void;
-    editUser: ManageUser<T>;
-    findUserById(id: number): T;
-    findUserByEmail(email: string): T;
-    findAllUsers(): Array<T>;
+    addContact: ManageContact<T>;
+    deleteContactById: (id: number) => void;
+    editContact: ManageContact<T>;
+    findContactById(id: number): T;
+    findContactByEmail(email: string): T;
+    findAllContacts(): Array<T>;
 }
 
-export class DemoUserRepository implements Repository<User> {
-    private users = new Map<number, User>();
+export class DemoContactRepository implements Repository<Contact> {
+    private contacts = new Map<number, Contact>();
 
-    public addUser(user: User): void {
-        if (this.findUserByEmail(user.email)) {
-            throw `User with email ${user.email} already exists.`;
+    public addContact(contact: Contact): void {
+        if (this.findContactByEmail(contact.email)) {
+            throw `Contact with email ${contact.email} already exists.`;
         }
-        user.id = this.getNextId();
-        this.users.set(user.id, user);
+        contact.id = this.getNextId();
+        this.contacts.set(contact.id, contact);
     }
 
-    public editUser(user: User): void {
-        let found = this.findUserByEmail(user.email);
-        if (found && found.id !== user.id) {
-            throw `Another user with email ${user.email} already exists.`;
+    public editContact(contact: Contact): void {
+        let found = this.findContactByEmail(contact.email);
+        if (found && found.id !== contact.id) {
+            throw `Another contact with email ${contact.email} already exists.`;
         }
-        this.users.set(user.id, user);
+        this.contacts.set(contact.id, contact);
     }
 
-    public deleteUserById(id: number): void {
-        delete this.users.get(id);
+    public deleteContactById(id: number): void {
+        delete this.contacts.get(id);
     }
 
-    public findUserById(id: number): User {
-        return this.users.get(id);
+    public findContactById(id: number): Contact {
+        return this.contacts.get(id);
     }
 
-    public findUserByEmail(email: string): User {
-        let result: User = undefined;
-        this.users.forEach(user => {
-            if (user.email === email) {
-                result = user;
+    public findContactByEmail(email: string): Contact {
+        let result: Contact = undefined;
+        this.contacts.forEach(contact => {
+            if (contact.email === email) {
+                result = contact;
                 return false;
             }
         });
         return result;
     }
 
-    public findAllUsers(): User[] {
-        let results: User[] = [];
-        this.users.forEach(user => results.push(user));
+    public findAllContacts(): Contact[] {
+        let results: Contact[] = [];
+        this.contacts.forEach(contact => results.push(contact));
         return results;
     }
 
     private getNextId(): number {
         let maxId = 0;
-        this.users.forEach((user) => {
-            if (user.id > maxId) maxId = user.id;
+        this.contacts.forEach((contact) => {
+            if (contact.id > maxId) maxId = contact.id;
         });
         return maxId + 1;
     }

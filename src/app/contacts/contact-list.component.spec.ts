@@ -1,34 +1,34 @@
 import { TestBed, ComponentFixture, async, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { UserDetailComponent } from './user-detail.component';
-import { UserListComponent } from './user-list.component';
+import { ContactDetailComponent } from './contact-detail.component';
+import { ContactListComponent } from './contact-list.component';
 
 import { FormsModule } from '@angular/forms';
 import { BackendService } from '../common/backend.service';
-import { UserService } from './user.service';
+import { ContactService } from './contact.service';
 import { Logger } from '../common/logger.service';
-import { Admin } from './user.model';
+import { Admin } from './contact.model';
 
-let comp: UserListComponent;
-let fixture: ComponentFixture<UserListComponent>;
+let comp: ContactListComponent;
+let fixture: ComponentFixture<ContactListComponent>;
 let spy: jasmine.Spy;
 let de: DebugElement;
 // let el: HTMLElement;
 let backendService: BackendService;
 
-const testUsers = [new Admin('Brian', 'Harisson', 'brian@gmail.com', 'brian')];
+const testContacts = [new Admin('Brian', 'Harisson', 'brian@gmail.com', 'brian')];
 
 describe('App', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule],
-      providers: [BackendService, UserService, Logger],
-      declarations: [UserDetailComponent, UserListComponent]
+      providers: [BackendService, ContactService, Logger],
+      declarations: [ContactDetailComponent, ContactListComponent]
     });
 
     // Create component
-    fixture = TestBed.createComponent(UserListComponent);
+    fixture = TestBed.createComponent(ContactListComponent);
     comp = fixture.componentInstance;
 
     // Get BackendService actually injected into the component
@@ -36,30 +36,30 @@ describe('App', () => {
 
     // Setup spy on the `getQuote` method
     spy = spyOn(backendService, 'getAll')
-      .and.returnValue(Promise.resolve(testUsers));
+      .and.returnValue(Promise.resolve(testContacts));
 
     // Get the Twain quote element by CSS selector (e.g., by class name)
     de = fixture.debugElement.query(By.css('.items'));
     // el = de.nativeElement;
   });
 
-  it('should be UserListComponent', () => {
-    expect(fixture.componentInstance instanceof UserListComponent).toBe(true, 'should create AppComponent');
+  it('should be ContactListComponent', () => {
+    expect(fixture.componentInstance instanceof ContactListComponent).toBe(true, 'should create AppComponent');
   });
 
-  it('should call getAll() users', () => {
-    expect(de.children.length).toBe(0, 'should be no users yet');
+  it('should call getAll() contacts', () => {
+    expect(de.children.length).toBe(0, 'should be no contacts yet');
     fixture.detectChanges();
-    // getAll service is async => still has not returned with userss
-    expect(de.children.length).toBe(0, 'no users yet');
+    // getAll service is async => still has not returned with contactss
+    expect(de.children.length).toBe(0, 'no contacts yet');
     expect(spy.calls.any()).toBe(true, 'getAll called');
   });
 
-  it('should show one user after getAll promise (fakeAsync)', fakeAsync(() => {
+  it('should show one contact after getAll promise (fakeAsync)', fakeAsync(() => {
     fixture.detectChanges();
     tick();                  // wait for async getQuote
     fixture.detectChanges(); // update view with quote
-    expect(de.children.length).toBe(1, 'should be shown one user');
-    expect(de.children[0].nativeElement.textContent).toContain('Test User', 'should contain "Test User"');
+    expect(de.children.length).toBe(1, 'should be shown one contact');
+    expect(de.children[0].nativeElement.textContent).toContain('Test Contact', 'should contain "Test Contact"');
   }));
 });

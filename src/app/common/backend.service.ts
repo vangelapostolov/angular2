@@ -1,28 +1,26 @@
 import { Injectable, Type } from '@angular/core';
 
 import { Logger } from './logger.service';
-import { Contact, Gender } from './../contacts/contact.model';
+//import { Contact, Gender } from './../contacts/contact.model';
 import { Identifiable } from './common.interfaces';
-
+/*
 const CONTACTS: Identifiable[] = [
-  new Customer('John', 'Smith', Gender.MALE, 'john@abv.bg', 'john'),
-  new Customer('Sara', 'Smith', Gender.FEMALE, 'sara@abv.bg', 'sara'),
-  new Operator('Veronica', 'Simpson', Gender.FEMALE, 'vera@yahoo.com', 'vera'),
-  new Operator('Simon', 'Stars', Gender.MALE, 'simon@yahoo.com', 'simon'),
-  new Admin('Brian', 'Harisson', Gender.MALE, 'brian@gmail.com', 'brian'),
-  new Admin('Svetlana', 'Borisova', Gender.FEMALE, 'sveta@gmail.com', 'sveta')
+  new Contact('John', 'Smith', Gender.MALE, 'john@abv.bg', 'john'),
+  new Contact('Sara', 'Smith', Gender.FEMALE, 'sara@abv.bg', 'sara'),
+  new Contact('Veronica', 'Simpson', Gender.FEMALE, 'vera@yahoo.com', 'vera'),
+  new Contact('Simon', 'Stars', Gender.MALE, 'simon@yahoo.com', 'simon'),
+  new Contact('Brian', 'Harisson', Gender.MALE, 'brian@gmail.com', 'brian'),
+  new Contact('Svetlana', 'Borisova', Gender.FEMALE, 'sveta@gmail.com', 'sveta')
 ];
-
+*/
 @Injectable()
 export class BackendService {
   constructor(private logger: Logger) { }
-
+/*
   public findAll<T extends Identifiable>(type: Type<T>): Promise<T[]> {
     switch (type.name) {
-      case Product.name:
-        return Promise.resolve(PRODUCTS);
-      case User.name:
-        return Promise.resolve(USERS);
+      case Contact.name:
+        return Promise.resolve(CONTACTS);
       default:
         let err = new Error(`Cannot recognize entity type: ${type.name}`);
         return Promise.reject<T[]>(err);
@@ -39,13 +37,9 @@ export class BackendService {
 
   public add<T extends Identifiable>(type: Type<T>, item: T): Promise<T> {
     switch (type.name) {
-      case Product.name:
-        item.id = this.getNextId(PRODUCTS);
-        PRODUCTS.push(item);
-        return Promise.resolve(item);
-      case User.name:
-        item.id = this.getNextId(PRODUCTS);
-        PRODUCTS.push(item);
+      case Contact.name:
+        item.id = this.getNextId(CONTACTS);
+        CONTACTS.push(item);
         return Promise.resolve(item);
       default:
         let err = new Error(`Cannot recognize entity type: ${type.name}`);
@@ -57,11 +51,8 @@ export class BackendService {
     let isSuccessful = false;
     let err = new Error(`${type.name} with ID:${item.id} does not exist: ${JSON.stringify(item)}.`);
     switch (type.name) {
-      case Product.name:
-        isSuccessful = this.mergeItem(PRODUCTS, item);
-        break;
-      case User.name:
-        isSuccessful = this.mergeItem(USERS, item);
+      case Contact.name:
+        isSuccessful = this.mergeItem(CONTACTS, item);
         break;
       default:
         err = new Error(`Cannot recognize entity type: ${type.name}`);
@@ -73,11 +64,8 @@ export class BackendService {
     let deleted: T | undefined = undefined;
     let err = new Error(`${type.name} with ID:${itemId} does not exist.`);
     switch (type.name) {
-      case Product.name:
-        deleted = this.deleteItem(<T[]> PRODUCTS, itemId);
-        break;
-      case User.name:
-        deleted = this.deleteItem(<T[]> USERS, itemId);
+      case Contact.name:
+        deleted = this.deleteItem(<T[]> CONTACTS, itemId);
         break;
       default:
         err = new Error(`Cannot recognize entity type: ${type.name}`);
@@ -108,5 +96,5 @@ export class BackendService {
     }
     return undefined;
   }
-
+*/
 }

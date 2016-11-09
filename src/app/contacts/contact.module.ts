@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { UserListComponent } from './contact-list.component';
-import { UserService } from './contact.service';
-import { UserDetailComponent } from './contact-detail.component';
+import { ContactListComponent } from './contact-list.component';
+import { ContactService } from './contact.service';
+import { ContactDetailComponent } from './contact-detail.component';
 
 @NgModule({
   imports: [
@@ -11,15 +11,15 @@ import { UserDetailComponent } from './contact-detail.component';
     FormsModule
   ],
   providers: [
-    UserService
+    ContactService
   ],
   declarations: [
-    UserListComponent,
-    UserDetailComponent
+    ContactListComponent,
+    ContactDetailComponent
   ],
   exports: [
-    UserListComponent,
-    UserDetailComponent
+    ContactListComponent,
+    ContactDetailComponent
   ]
 })
-export class UserModule { }
+export class ContactModule { }

@@ -1,22 +1,23 @@
 // import greeter from './greeter';
-import { Repository, DemoUserRepository } from './contact-repository';
+/*
+import { Repository, DemoContactRepository } from './contact-repository';
 import { DemoLoginController, LoginController } from './login-controller';
 import { Contact } from './contact';
 import { LoginComponent } from './login-component';
 
-const userRepo: Repository<User>  = new DemoUserRepository();
-userRepo.addUser(new Customer('John', 'Smith', 'john@abv.bg', 'john'));
-userRepo.addUser(new Customer('Sara', 'Smith', 'sara@abv.bg', 'sara'));
-userRepo.addUser(new Admin('Brian', 'Harisson', 'brian@gmail.com', 'brian'));
+const contactRepo: Repository<Contact>  = new DemoContactRepository();
+contactRepo.addContact(new Customer('John', 'Smith', 'john@abv.bg', 'john'));
+contactRepo.addContact(new Customer('Sara', 'Smith', 'sara@abv.bg', 'sara'));
+contactRepo.addContact(new Admin('Brian', 'Harisson', 'brian@gmail.com', 'brian'));
 
-const loginController: LoginController = new DemoLoginController(userRepo);
+const loginController: LoginController = new DemoLoginController(contactRepo);
 // loginController.login('john@abv.bg', 'john');
 
-// let user = 'TypeScript User';
-// document.getElementById('content').innerHTML = JSON.stringify( loginController.getCurrentUser() );
+// let contact = 'TypeScript Contact';
+// document.getElementById('content').innerHTML = JSON.stringify( loginController.getCurrentContact() );
 
 const loginComponent = new LoginComponent('#content', loginController);
-
+*/
 // console.log(new PhysicalPerson('Ivan', 'Donchev', 'Petrov').salutation);
 
 // interface Repository<T> {

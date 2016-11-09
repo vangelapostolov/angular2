@@ -1,38 +1,38 @@
 import { Component, Input, OnInit, SimpleChange } from '@angular/core';
 
-import { User } from './user.model';
-import { UserService } from './user.service';
+import { Contact } from './contact.model';
+import { ContactService } from './contact.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 
 @Component({
   // moduleId: module.id,
-  selector: 'user-detail',
-  templateUrl: './user-detail.component.html'
+  selector: 'contact-detail',
+  templateUrl: './contact-detail.component.html'
 })
 
     
-export class UserDetailComponent implements OnInit {
-  @Input('user')
-  public userMaster: User = {id: undefined};
-  public user: User;
+export class ContactDetailComponent implements OnInit {
+  @Input('contact')
+  public contactMaster: Contact = {id: undefined};
+  public contact: Contact;
 
-  public isNewUser: boolean;
+  public isNewContact: boolean;
 
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: UserService) { }
+    private service: ContactService) { }
 
   public ngOnInit() {
     this.resetForm();
     this.route.params.forEach((params: Params) => {
       let id = +params['id']; // (+) converts string 'id' to a number
       if (id) {
-        this.isNewUser = false; // has Id => not new
-        this.service.getUser(id).then(
-          user => {
-            this.userMaster = user;
+        this.isNewContact = false; // has Id => not new
+        this.service.getContact(id).then(
+          contact => {
+            this.contactMaster = contact;
             this.resetForm();
           });
       }
@@ -40,13 +40,13 @@ export class UserDetailComponent implements OnInit {
   }
 
   public ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
-    let chng = changes['user'];
+    let chng = changes['contact'];
     if (chng.currentValue !== chng.previousValue) {
       this.resetForm();
     }
   }
 
   public resetForm() {
-    this.user = Object.assign({}, this.userMaster)
+    this.contact = Object.assign({}, this.contactMaster)
   }
 }

@@ -8,7 +8,7 @@ export class Contact {
     public address: string;
 }
 /*
-export class User extends Person {
+export class Contact extends Person {
     public password?: string;
     public role?: Role;
     public readonly name?: string;
@@ -32,7 +32,7 @@ export enum Role {
 
 let nextId = 1; // Autoincrement ids
 
-abstract class UserImpl implements User {
+abstract class ContactImpl implements Contact {
     public id: number;
     constructor(
         public firstName: string, public lastName: string, public gender: Gender,
@@ -59,7 +59,7 @@ abstract class UserImpl implements User {
     }
 }
 
-export class Customer extends UserImpl {
+export class Customer extends ContactImpl {
     constructor(
         firstName: string, lastName: string, gender: Gender,
         email: string, password: string,
@@ -68,7 +68,7 @@ export class Customer extends UserImpl {
     }
 }
 
-export class Operator extends UserImpl {
+export class Operator extends ContactImpl {
     constructor(
         firstName: string, lastName: string, gender: Gender,
         email: string, password: string,
@@ -77,7 +77,7 @@ export class Operator extends UserImpl {
     }
 }
 
-export class Admin extends UserImpl {
+export class Admin extends ContactImpl {
     constructor(
         firstName: string, lastName: string, gender: Gender,
         email: string, password: string,

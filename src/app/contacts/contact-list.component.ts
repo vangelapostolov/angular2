@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User, Role, Gender } from './user.model';
-import { UserService } from './user.service';
+import { Contact, Role, Gender } from './contact.model';
+import { ContactService } from './contact.service';
 
 const customerMaleImage = require('../../assets/img/customer_m.png');
 const customerFemaleImage = require('../../assets/img/customer_f.png');
@@ -12,27 +12,27 @@ const adminFemaleImage = require('../../assets/img/admin_f.png');
 
 @Component({
   // moduleId: module.id,
-  selector: 'user-list',
-  templateUrl: './user-list.component.html',
+  selector: 'contact-list',
+  templateUrl: './contact-list.component.html',
   styles: [`
-    .user {
+    .contact {
       height: 45px;
       width: 350px;
     }
-    .users .item-badge {
+    .contacts .item-badge {
       height: 45px;
       font-size: 1.3em;
     }
-    .user-icon {
+    .contact-icon {
       display: block;
       float: right;
     }
   `],
-  providers: [UserService]
+  providers: [ContactService]
 })
-export class UserListComponent implements OnInit {
-  public users: User[] = [];
-  public selectedUser: User;
+export class ContactListComponent implements OnInit {
+  public contacts: Contact[] = [];
+  public selectedContact: Contact;
 
   public CUSTOMER_MALE = Role.CUSTOMER + Gender.MALE;
   public CUSTOMER_FEMALE = Role.CUSTOMER + Gender.FEMALE;
@@ -48,13 +48,13 @@ export class UserListComponent implements OnInit {
   public adminMaleImage = adminMaleImage;
   public adminFemaleImage = adminFemaleImage;
 
-  constructor(private service: UserService) { }
+  constructor(private service: ContactService) { }
 
   public ngOnInit() {
-    this.service.getUsers().then(
-       users => this.users = users
+    this.service.getContacts().then(
+       contacts => this.contacts = contacts
      );
   }
 
-  public selectItem(user: User) { this.selectedUser = user; }
+  public selectItem(contact: Contact) { this.selectedContact = contact; }
 }

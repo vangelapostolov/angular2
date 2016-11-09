@@ -1,25 +1,25 @@
 import { NgModule }     from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { UserListComponent } from './user-list.component';
-import { UserDetailComponent } from './user-detail.component';
+import { ContactListComponent } from './contact-list.component';
+import { ContactDetailComponent } from './contact-detail.component';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: 'users',  component: UserListComponent },
+      { path: 'contacts',  component: ContactListComponent },
       {
-        path: 'user/:id',
-        component: UserDetailComponent,
+        path: 'contact/:id',
+        component: ContactDetailComponent,
         data: {
-          title: 'Edit user'
+          title: 'Edit contact'
         }
        },
       {
-        path: 'user',
+        path: 'contact',
         pathMatch: 'full',
-        component: UserDetailComponent,
+        component: ContactDetailComponent,
         data: {
-          title: 'Add New user'
+          title: 'Add New contact'
         }
       }
     ])
@@ -28,4 +28,4 @@ import { UserDetailComponent } from './user-detail.component';
     RouterModule
   ]
 })
-export class UserRoutingModule {}
+export class ContactRoutingModule {}
