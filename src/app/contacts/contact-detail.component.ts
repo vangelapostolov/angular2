@@ -13,7 +13,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
     
 export class ContactDetailComponent implements OnInit {
   @Input('contact')
-  public contactMaster: Contact = {id: undefined};
+  public contactMaster: Contact = {id: undefined} as Contact;
   public contact: Contact;
 
   public isNewContact: boolean;

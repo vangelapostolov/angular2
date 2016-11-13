@@ -1,27 +1,15 @@
-export class Contact {
+import { Identifiable } from './../common/common.interfaces';
+let nextId = 1; // Autoincrement ids
+
+export class Contact implements Identifiable {
     public id: number;
-    public gender: Gender;
-    public name: string;
-    public family: string;
-    public email: string;
-    public phone: string;
-    public address: string;
-}
-/*
-export class Contact extends Person {
-    public password?: string;
-    public role?: Role;
-    public readonly name?: string;
-    public readonly roleAsString?: string;
-    public readonly salutation?: string;
+    constructor(
+        public name: string, public family: string, public gender: Gender,
+        public email: string, public phone: string, public address: string) {
+        this.id = nextId++;
+    }
 }
 
-export interface Contact {
-    city?: String;
-    address?: string;
-    phone?: string;
-}
-*/
 export enum Gender {
     FEMALE = 0, MALE = 1
 }
@@ -86,3 +74,4 @@ export class Admin extends ContactImpl {
     }
 }
 */
+

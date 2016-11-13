@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Contact, Role, Gender } from './contact.model';
+import { Contact, Gender } from './contact.model';
 import { ContactService } from './contact.service';
 
-const customerMaleImage = require('../../assets/img/customer_m.png');
-const customerFemaleImage = require('../../assets/img/customer_f.png');
-const operatorMaleImage = require('../../assets/img/operator_m.png');
-const operatorFemaleImage = require('../../assets/img/operator_f.png');
-const adminMaleImage = require('../../assets/img/admin_m.png');
-const adminFemaleImage = require('../../assets/img/admin_f.png');
+const contactMaleImage = require('../../assets/img/contact_m.png');
+const contactFemaleImage = require('../../assets/img/contact_f.png');
 
 @Component({
   // moduleId: module.id,
@@ -34,19 +30,11 @@ export class ContactListComponent implements OnInit {
   public contacts: Contact[] = [];
   public selectedContact: Contact;
 
-  public CUSTOMER_MALE = Role.CUSTOMER + Gender.MALE;
-  public CUSTOMER_FEMALE = Role.CUSTOMER + Gender.FEMALE;
-  public OPERATOR_MALE = Role.OPERATOR + Gender.MALE;
-  public OPERATOR_FEMALE = Role.OPERATOR + Gender.FEMALE;
-  public ADMIN_MALE = Role.ADMIN + Gender.MALE;
-  public ADMIN_FEMALE = Role.ADMIN + Gender.FEMALE;
+  public CONTACT_MALE = Gender.MALE;
+  public CONTACT_FEMALE = Gender.FEMALE;
 
-  public customerMaleImage = customerMaleImage;
-  public customerFemaleImage = customerFemaleImage;
-  public operatorMaleImage = operatorMaleImage;
-  public operatorFemaleImage = operatorFemaleImage;
-  public adminMaleImage = adminMaleImage;
-  public adminFemaleImage = adminFemaleImage;
+  public contactMaleImage = contactMaleImage;
+  public contactFemaleImage = contactFemaleImage;
 
   constructor(private service: ContactService) { }
 

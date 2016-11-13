@@ -23,12 +23,12 @@ export class ContactService {
     return this.backend.find(Contact, id);
   }
 
-  public addContact(Contact: Contact): Promise<Contact> {
-    return this.backend.add(Contact, Contact);
+  public addContact(Contact: contact): Promise<Contact> {
+    return this.backend.add(Contact, contacts);
   }
 
-  public editContact(Contact: Contact): Promise<Contact> {
-    return this.backend.edit(Contact, Contact);
+  public editContact(Contact: contact): Promise<Contact> {
+    return this.backend.edit(Contact, contact);
   }
 
   public deleteContact(contactId: number): Promise<Contact> {
