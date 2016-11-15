@@ -3,6 +3,7 @@ import { Injectable, Type } from '@angular/core';
 import { Logger } from './logger.service';
 import { Contact, Gender } from './../contacts/contact.model';
 import { Identifiable } from './common.interfaces';
+import { BackendService } from './backend.service';
 
 const CONTACTS: Identifiable[] = [
   new Contact('АНКА', 'ПЕТКОВА', Gender.FEMALE, 'anka@abv.bg', '123456', 'Кутузов 1'),
@@ -14,33 +15,33 @@ const CONTACTS: Identifiable[] = [
 ];
 
 @Injectable()
-export class BackendService {
+export class BackendMockService implements BackendService {
   constructor(private logger: Logger) { }
 
-  public findAll<T extends Identifiable>(type: Type<T>): Promise<T[]> {
+  public findAll<T extends Identifiable>(contat: Contact): Promise<T[]> {
         return Promise.resolve(CONTACTS);
   }
 
-  public find<T extends Identifiable>(type: Type<T>, id: number): Promise<T> {
+  public find<T extends Identifiable>(contat: Contact, id: number): Promise<T> {
     return this.findAll<T>(type).then(
       items => items.filter(item => item.id === id)[0]
     );
   }
 
-  public add<T extends Identifiable>(type: Type<T>, item: T): Promise<T> {
+  public add<T extends Identifiable>(contat: Contact, item: T): Promise<T> {
         item.id = this.getNextId(CONTACTS);
         CONTACTS.push(item);
         return Promise.resolve(item);
   }
 
-  public edit<T extends Identifiable>(type: Type<T>, item: T): Promise<T> {
+  public edit<T extends Identifiable>(contat: Contact, item: T): Promise<T> {
     let isSuccessful = false;
     let err = new Error(`Cannot edit the contact!`);
     isSuccessful = this.mergeItem(CONTACTS, item);
     return isSuccessful ? Promise.resolve(item) : Promise.reject<T>(err);
   }
 
- public delete<T extends Identifiable>(type: Type<T>, itemId: number): Promise<T> {
+ public delete<T extends Identifiable>(contat: Contact, itemId: number): Promise<T> {
     let deleted: T | undefined = undefined;
     let err = new Error(`Cannot delete the contact!`);
     deleted = this.deleteItem(<T[]> CONTACTS, itemId);

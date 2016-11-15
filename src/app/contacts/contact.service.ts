@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 
 import { Contact } from './contact.model';
 import { BackendService } from '../common/backend.service';

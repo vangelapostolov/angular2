@@ -1,46 +1,50 @@
-import { Injectable, Type } from '@angular/core';
+import { Injectable, Inject, Type } from '@angular/core';
 
 import { Logger } from './logger.service';
 import { Contact, Gender } from './../contacts/contact.model';
 import { Identifiable } from './common.interfaces';
-
-const CONTACTS: Identifiable[] = [
-  new Contact('АНКА', 'ПЕТКОВА', Gender.FEMALE, 'anka@abv.bg', '123456', 'Кутузов 1'),
-  new Contact('ВАСИЛ', 'ЖЕЛЯЗКОВ', Gender.MALE, 'vasil@abv.bg', '123456', 'Никола Обретенов 23'),
-  new Contact('ДАМЯН', 'ИЛИЕВ', Gender.MALE, 'damqn@yahoo.com', '123456', 'Борисова 31'),
-  new Contact('ДИМИТЪР', 'СЛАВЧЕВ', Gender.MALE, 'mitko@yahoo.com', '123456', 'Александровска 2'),
-  new Contact('ДОРОТЕЯ', 'НИКОЛОВА', Gender.FEMALE, 'dori@gmail.com', '123456', 'Цар Освободител 13'),
-  new Contact('ПЕНКА', 'ЦОНЕВА', Gender.FEMALE, 'pepa@gmail.com', '123456', 'Ленин 45')
-];
+import { BackendService } from './backend.service';
+import { Headers, Http, RequestOptions, Response} from '@angular/http'
 
 @Injectable()
-export class BackendService {
-  constructor(private logger: Logger) { }
+export class BackendHttpService implements BackendService {
+  private headers = new Headers({ 'Content-Type': 'application/json' });
+  private options = new RequestOptions({ headers: this.headers });
 
-  public findAll<T extends Identifiable>(type: Type<T>): Promise<T[]> {
-        return Promise.resolve(CONTACTS);
+  constructor(
+    @Inject('API_BASE_URL') private baseUrl: string,
+    private http: Http,
+    private logger: Logger) { }
+
+  public findAll<T extends Identifiable>(contat: Contact): Promise<T[]> {
+    let collection = type.name.toLowerCase() + 's';
+    return this.http.get(this.baseUrl + '/' + collection)
+      .map(response => response.json().data as T[])
+      .do((items: User[]) => this.logger.log(`Fetched ${items.length} ${collection}.`))
+      .catch(this.handleErrorObservable)
+      .toPromise();
   }
 
-  public find<T extends Identifiable>(type: Type<T>, id: number): Promise<T> {
+  public find<T extends Identifiable>(contat: Contact, id: number): Promise<T> {
     return this.findAll<T>(type).then(
       items => items.filter(item => item.id === id)[0]
     );
   }
 
-  public add<T extends Identifiable>(type: Type<T>, item: T): Promise<T> {
+  public add<T extends Identifiable>(contat: Contact, item: T): Promise<T> {
         item.id = this.getNextId(CONTACTS);
         CONTACTS.push(item);
         return Promise.resolve(item);
   }
 
-  public edit<T extends Identifiable>(type: Type<T>, item: T): Promise<T> {
+  public edit<T extends Identifiable>(contat: Contact, item: T): Promise<T> {
     let isSuccessful = false;
     let err = new Error(`Cannot edit the contact!`);
     isSuccessful = this.mergeItem(CONTACTS, item);
     return isSuccessful ? Promise.resolve(item) : Promise.reject<T>(err);
   }
 
- public delete<T extends Identifiable>(type: Type<T>, itemId: number): Promise<T> {
+ public delete<T extends Identifiable>(contat: Contact, itemId: number): Promise<T> {
     let deleted: T | undefined = undefined;
     let err = new Error(`Cannot delete the contact!`);
     deleted = this.deleteItem(<T[]> CONTACTS, itemId);
