@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-			<a class="navbar-brand" routerLink="/home" routerLinkActive="active"><img [src]="imageLogo" alt="ESOF"></a>
+			<a class="navbar-brand" routerLink="/home" routerLinkActive="active"><img [src]="imageLogo" alt="ESOF" style="margin: 12px;"></a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -27,7 +27,10 @@
                 <li role="separator" className="divider"></li>
                 <li><NavLink to="/repos/reactjs/react-router">React Router</NavLink></li>
                 <li><NavLink to="/repos/facebook/react">React</NavLink></li> -->
-						<li><a href="#">Add New Contact</a></li>
+						<li><a routerLink="/contacts"  routerLinkActive="active">All Contacts</a></li>
+						<!--<li><a href="#">Add New Contact</a></li>
+						<li><a href="#">Search Contact</a></li>
+						-->
 					</ul>
 				</li>
 

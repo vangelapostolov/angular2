@@ -1,6 +1,17 @@
-<div class="user-list row">
-	<h2>User List</h2>
+<div class="contact-list row">
+	<h2>All Contacts List</h2>
 
+	<ul class="items contacts">
+		<li *ngFor="let contact of contacts" class="contact" [class.selected]="contact === selectedContact" (click)="selectItem(contact)" [title]="contact.name+' '+contact.family">
+			<span class="item-badge">{{contact.id}}</span>{{contact.name}} {{contact.family }}
+			<span class="contact-icon" [ngSwitch]="contact.gender">
+				<span *ngSwitchCase="CONTACT_MALE"><img [src]="contactMaleImage"></span>
+				<span *ngSwitchCase="CONTACT_FEMALE"><img [src]="contactFemaleImage"></span>
+				<span *ngSwitchDefault>Other</span>
+			</span>
+		</li>
+	</ul>
+	<!--
 	<p><i>Pick a user from the list</i></p>
 	<ul class="items users">
 		<li *ngFor="let user of users" class="user" [class.selected]="user === selectedUser" (click)="selectItem(user)" [title]="user.description">
@@ -15,4 +26,5 @@
 	</ul>
 
 	<user-detail *ngIf="selectedUser" [user]="selectedUser"></user-detail>
+	-->
 </div>
