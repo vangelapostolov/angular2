@@ -5,7 +5,7 @@ import { Contact, Gender } from './../contacts/contact.model';
 import { Identifiable } from './common.interfaces';
 import { BackendService } from './backend.service';
 
-const CONTACTS: Identifiable[] = [
+const CONTACTS: Contact[] = [
   new Contact('АНКА', 'ПЕТКОВА', Gender.FEMALE, 'anka@abv.bg', '123456', 'Кутузов 1'),
   new Contact('ВАСИЛ', 'ЖЕЛЯЗКОВ', Gender.MALE, 'vasil@abv.bg', '123456', 'Никола Обретенов 23'),
   new Contact('ДАМЯН', 'ИЛИЕВ', Gender.MALE, 'damqn@yahoo.com', '123456', 'Борисова 31'),
@@ -18,30 +18,30 @@ const CONTACTS: Identifiable[] = [
 export class BackendMockService implements BackendService {
   constructor(private logger: Logger) { }
 
-  public findAll<T extends Identifiable>(contat: Contact): Promise<T[]> {
+  public findAll(): Promise<Contact[]> {
         return Promise.resolve(CONTACTS);
   }
-
-  public find<T extends Identifiable>(contat: Contact, id: number): Promise<T> {
+/*
+  public find<T extends Identifiable>(contacts: Contact[], id: number): Promise<T> {
     return this.findAll<T>(type).then(
       items => items.filter(item => item.id === id)[0]
     );
   }
 
-  public add<T extends Identifiable>(contat: Contact, item: T): Promise<T> {
+  public add<T extends Identifiable>(contacts: Contact[], item: T): Promise<T> {
         item.id = this.getNextId(CONTACTS);
         CONTACTS.push(item);
         return Promise.resolve(item);
   }
 
-  public edit<T extends Identifiable>(contat: Contact, item: T): Promise<T> {
+  public edit<T extends Identifiable>(contacts: Contact[], item: T): Promise<T> {
     let isSuccessful = false;
     let err = new Error(`Cannot edit the contact!`);
     isSuccessful = this.mergeItem(CONTACTS, item);
     return isSuccessful ? Promise.resolve(item) : Promise.reject<T>(err);
   }
 
- public delete<T extends Identifiable>(contat: Contact, itemId: number): Promise<T> {
+ public delete<T extends Identifiable>(contacts: Contact[], itemId: number): Promise<T> {
     let deleted: T | undefined = undefined;
     let err = new Error(`Cannot delete the contact!`);
     deleted = this.deleteItem(<T[]> CONTACTS, itemId);
@@ -71,5 +71,5 @@ export class BackendMockService implements BackendService {
     }
     return undefined;
   }
-
+*/
 }

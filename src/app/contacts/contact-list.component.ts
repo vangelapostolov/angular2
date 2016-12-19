@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Contact, Gender } from './contact.model';
-//import { ContactService } from './contact.service';
+import { ContactService } from './contact.service';
 
 const contactMaleImage = require('../../assets/img/contact_m.png');
 const contactFemaleImage = require('../../assets/img/contact_f.png');
 
-//import { Identifiable } from '../common/common.interfaces';
+import { Identifiable } from './../common/common.interfaces';
+/*
 const CONTACTS: Contact[] = [
   new Contact('АНКА', 'ПЕТКОВА', Gender.FEMALE, 'anka@abv.bg', '123456', 'Кутузов 1'),
   new Contact('ВАСИЛ', 'ЖЕЛЯЗКОВ', Gender.MALE, 'vasil@abv.bg', '123456', 'Никола Обретенов 23'),
@@ -15,6 +16,7 @@ const CONTACTS: Contact[] = [
   new Contact('ДОРОТЕЯ', 'НИКОЛОВА', Gender.FEMALE, 'dori@gmail.com', '123456', 'Цар Освободител 13'),
   new Contact('ПЕНКА', 'ЦОНЕВА', Gender.FEMALE, 'pepa@gmail.com', '123456', 'Ленин 45')
 ];
+*/
 
 @Component({
   // moduleId: module.id,
@@ -33,12 +35,12 @@ const CONTACTS: Contact[] = [
       display: block;
       float: right;
     }
-  `]
-  //,providers: [ContactService]
+  `],
+  providers: [ContactService]
 })
 export class ContactListComponent implements OnInit {
   public contacts: Contact[] = [];
-  //public selectedContact: Contact;
+  public selectedContact: Contact;
 
   public CONTACT_MALE = Gender.MALE;
   public CONTACT_FEMALE = Gender.FEMALE;
@@ -46,15 +48,15 @@ export class ContactListComponent implements OnInit {
   public contactMaleImage = contactMaleImage;
   public contactFemaleImage = contactFemaleImage;
 
-  //constructor(private service: ContactService) { }
+  constructor(private service: ContactService) { }
 
   public ngOnInit() {
-    /*
     this.service.getContacts().then(
        contacts => this.contacts = contacts
-     );
-     */
-    this.contacts = CONTACTS;
+    ).catch(err => {
+      throw new Error(`Cannot get contacts!`);
+    });
+    //this.contacts = CONTACTS;
   }
 
   //public selectItem(contact: Contact) { this.selectedContact = contact; }

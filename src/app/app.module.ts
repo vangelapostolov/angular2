@@ -1,6 +1,6 @@
 import { NgModule }     from '@angular/core';
 import { AppComponent } from './app.component';
-//import { CommonModule } from './common/common.module';
+import { CommonModule } from './common/common.module';
 import { HomeModule } from './home/home.module';
 import { ContactModule } from './contacts/contacts.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,7 +14,7 @@ import { AppNavComponent } from './app-nav.component';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    //CommonModule,
+    CommonModule,
     HomeModule,
     ContactModule
   ],

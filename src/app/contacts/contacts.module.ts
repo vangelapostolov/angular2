@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { ContactListComponent } from './contact-list.component';
-//import { ContactService } from './contact.service';
+import { ContactService } from './contact.service';
 //import { ContactDetailComponent } from './contact-detail.component';
 
 @NgModule({
@@ -11,7 +11,7 @@ import { ContactListComponent } from './contact-list.component';
     FormsModule
   ],
   providers: [
-    //ContactService
+    ContactService
   ],
   declarations: [
     ContactListComponent

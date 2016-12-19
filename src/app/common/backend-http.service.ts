@@ -16,7 +16,7 @@ export class BackendHttpService implements BackendService {
     private http: Http,
     private logger: Logger) { }
 
-  public findAll<T extends Identifiable>(contat: Contact): Promise<T[]> {
+  public findAll<T extends Identifiable>(contact: Contact): Promise<T[]> {
     let collection = type.name.toLowerCase() + 's';
     return this.http.get(this.baseUrl + '/' + collection)
       .map(response => response.json().data as T[])
@@ -25,26 +25,26 @@ export class BackendHttpService implements BackendService {
       .toPromise();
   }
 
-  public find<T extends Identifiable>(contat: Contact, id: number): Promise<T> {
+  public find<T extends Identifiable>(contact: Contact, id: number): Promise<T> {
     return this.findAll<T>(type).then(
       items => items.filter(item => item.id === id)[0]
     );
   }
 
-  public add<T extends Identifiable>(contat: Contact, item: T): Promise<T> {
+  public add<T extends Identifiable>(contact: Contact, item: T): Promise<T> {
         item.id = this.getNextId(CONTACTS);
         CONTACTS.push(item);
         return Promise.resolve(item);
   }
 
-  public edit<T extends Identifiable>(contat: Contact, item: T): Promise<T> {
+  public edit<T extends Identifiable>(contact: Contact, item: T): Promise<T> {
     let isSuccessful = false;
     let err = new Error(`Cannot edit the contact!`);
     isSuccessful = this.mergeItem(CONTACTS, item);
     return isSuccessful ? Promise.resolve(item) : Promise.reject<T>(err);
   }
 
- public delete<T extends Identifiable>(contat: Contact, itemId: number): Promise<T> {
+ public delete<T extends Identifiable>(contact: Contact, itemId: number): Promise<T> {
     let deleted: T | undefined = undefined;
     let err = new Error(`Cannot delete the contact!`);
     deleted = this.deleteItem(<T[]> CONTACTS, itemId);
