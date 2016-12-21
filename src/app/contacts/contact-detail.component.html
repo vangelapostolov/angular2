@@ -1,32 +1,60 @@
 <hr>
-<h3>{{user.name}} Details</h3>
-<form class="form-horizontal col-xs-12 col-sm-9 col-md-6 col-lg-4">
+<h3>{{contact.name}} {{contact.family}} Details</h3>
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="form-horizontal col-xs-12 col-sm-9 col-md-6 col-lg-4">
 	<div class="form-group">
 		<label class="control-label col-xs-3 hidden-xs" for="id">ID:</label>
 		<div class="col-xs-12 col-sm-9">
-			<input [ngModel]="user.id" id="id" name="id" disabled class="form-control">
+			<input [ngModel]="contact.id" id="id" name="id" disabled class="form-control">
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="control-label col-xs-3 hidden-xs" for="firstName">First Name:</label>
+		<label class="control-label col-xs-3 hidden-xs" for="gender_M">Gender:</label>
+		<div class="col-xs-12 col-sm-9 col_radio">
+			<input [(ngModel)]="contact.gender" class="col-xs-12 col-sm-9" id="gender_M" name="gender" type="radio" value="MALE" 
+				required class="form-control">
+			<label class="control-label col-xs-3 hidden-xs" for="gender_M">Male</label>
+
+			<input [(ngModel)]="contact.gender" class="col-xs-12 col-sm-9" id="gender_F" name="gender" type="radio" value="FEMALE" 
+				required class="form-control">
+			<label class="control-label col-xs-3 hidden-xs" for="gender_F">Female</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-xs-3 hidden-xs" for="firstName">Name:</label>
 		<div class="col-xs-12 col-sm-9">
-			<input [(ngModel)]="user.firstName" class="col-xs-12 col-sm-9" id="firstName" name="firstName" placeholder="First Name"
+			<input [(ngModel)]="contact.name" class="col-xs-12 col-sm-9" id="firstName" name="name" placeholder="Name"
 				required class="form-control">
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="control-label col-xs-3 hidden-xs" for="lastName">Last Name:</label>
+		<label class="control-label col-xs-3 hidden-xs" for="lastName">Family:</label>
 		<div class="col-xs-12 col-sm-9">
-			<input [(ngModel)]="user.lastName" class="col-xs-12 col-sm-9" id="lastName" name="lastName" placeholder="Last Name"
+			<input [(ngModel)]="contact.family" class="col-xs-12 col-sm-9" id="lastName" name="family" placeholder="Family"
 				required class="form-control">
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="control-label col-xs-3 hidden-xs" for="email">Email:</label>
 		<div class="col-xs-12 col-sm-9">
-			<input [(ngModel)]="user.email" class="col-xs-12 col-sm-9" id="email" name="email"  placeholder="Email"
+			<input [(ngModel)]="contact.email" class="col-xs-12 col-sm-9" id="email" name="email"  placeholder="Email"
 				required pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" #email class="form-control">
 		</div>
-		<p>{{email.className}}</p>
 	</div>
+	<div class="form-group">
+		<label class="control-label col-xs-3 hidden-xs" for="phone">Phone:</label>
+		<div class="col-xs-12 col-sm-9">
+			<input [(ngModel)]="contact.phone" class="col-xs-12 col-sm-9" id="phone" name="phone" placeholder="Phone"
+				required class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-xs-3 hidden-xs" for="address">Address:</label>
+		<div class="col-xs-12 col-sm-9">
+			<textarea [(ngModel)]="contact.address" class="col-xs-12 col-sm-9" id="address" name="address" placeholder="Address"
+				required class="form-control"></textarea>
+		</div>
+	</div>
+	<button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Submit</button>
+	<button type="button" class="btn btn-danger" (click)="resetForm()">Reset</button>
+  	<button type="button" class="btn btn-default" (click)="goBack()">Cancel</button>
 </form>

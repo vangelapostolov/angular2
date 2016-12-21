@@ -21,15 +21,15 @@ export class ContactService {
       throw new Error(`Cannot get contacts in ContactService!`);
     });
   }
-/*
+
   public getContact(id: number): Promise<Contact> {
-    return this.backend.find(Contact, id);
+    return this.backend.find(id);
   }
 
-  public addContact(Contact: contact): Promise<Contact> {
-    return this.backend.add(Contact, contacts);
+  public addContact(contact: Contact): Promise<Contact> {
+    return this.backend.add(contact);
   }
-
+/*
   public editContact(Contact: contact): Promise<Contact> {
     return this.backend.edit(Contact, contact);
   }

@@ -5,6 +5,10 @@ import { Contact } from './../contacts/contact.model';
 export abstract class BackendService {
 
   public abstract findAll(): Promise<Contact[]>;
+
+  public abstract find(id: number): Promise<Contact>;
+
+  public abstract add(item: Contact): Promise<Contact>;
 /*
   public abstract find<T extends Identifiable>(contacts: Contact[], id: number): Promise<T>;
 

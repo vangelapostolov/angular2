@@ -142,3 +142,6 @@ button:disabled {
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.col_radio input { display: inline-block; width: 20px; height: 10px;}
+.col_radio label { margin-right: 35px; float: none;}

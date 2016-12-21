@@ -19,7 +19,7 @@ const CONTACTS: Contact[] = [
 */
 
 @Component({
-  // moduleId: module.id,
+  //moduleId: module.id,
   selector: 'contact-list',
   templateUrl: './contact-list.component.html',
   styles: [`

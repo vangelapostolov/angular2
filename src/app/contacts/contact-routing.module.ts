@@ -2,6 +2,7 @@ import { NgModule }     from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ContactListComponent } from './contact-list.component';
 import { ContactDetailComponent } from './contact-detail.component';
+import { ContactService } from './contact.service';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { ContactDetailComponent } from './contact-detail.component';
         }
        },
       {
-        path: 'contact',
+        path: 'contact/add',
         pathMatch: 'full',
         component: ContactDetailComponent,
         data: {

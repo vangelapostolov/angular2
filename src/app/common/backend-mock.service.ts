@@ -21,19 +21,24 @@ export class BackendMockService implements BackendService {
   public findAll(): Promise<Contact[]> {
         return Promise.resolve(CONTACTS);
   }
-/*
-  public find<T extends Identifiable>(contacts: Contact[], id: number): Promise<T> {
-    return this.findAll<T>(type).then(
+
+  public find(id: number): Promise<Contact> {
+    return this.findAll().then(
       items => items.filter(item => item.id === id)[0]
     );
   }
 
-  public add<T extends Identifiable>(contacts: Contact[], item: T): Promise<T> {
+  public add(item: Contact): Promise<Contact> {
         item.id = this.getNextId(CONTACTS);
         CONTACTS.push(item);
         return Promise.resolve(item);
   }
 
+  private getNextId(collection: Identifiable[]): number {
+    return collection.reduce((prevMaxId, next) =>
+      next.id > prevMaxId ? next.id : prevMaxId, 0) + 1;
+  }
+/*
   public edit<T extends Identifiable>(contacts: Contact[], item: T): Promise<T> {
     let isSuccessful = false;
     let err = new Error(`Cannot edit the contact!`);
@@ -46,11 +51,6 @@ export class BackendMockService implements BackendService {
     let err = new Error(`Cannot delete the contact!`);
     deleted = this.deleteItem(<T[]> CONTACTS, itemId);
     return deleted ? Promise.resolve(deleted) : Promise.reject<T>(err);
-  }
-
-  private getNextId(collection: Identifiable[]): number {
-    return collection.reduce((prevMaxId, next) =>
-      next.id > prevMaxId ? next.id : prevMaxId, 0) + 1;
   }
 
   private mergeItem(collection: Identifiable[], item: Identifiable): boolean {
