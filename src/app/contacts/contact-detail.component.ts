@@ -91,9 +91,9 @@ export class ContactDetailComponent implements OnInit, OnChanges {
     this.isNewContact = !this.contact.id; // if contact doesn't have ID => it is a new contact 
     this.contactForm = this.fb.group({
       'id': [{ value: this.contact.id, disabled: true }],
-      'gender': [this.contact.gender, [
+      'gender': [this.contact.gender, 
         Validators.required
-      ]],
+      ],
       'name': [this.contact.name, [
         Validators.required,
         Validators.minLength(2),
@@ -104,10 +104,15 @@ export class ContactDetailComponent implements OnInit, OnChanges {
         Validators.minLength(2),
         Validators.maxLength(40)
       ]],
-      'email': [this.contact.email],
+      'email': [this.contact.email, [
+        Validators.required,
+        //Validators.pattern('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$')
+        Validators.minLength(2)
+      ]],
       'phone': [this.contact.phone, [
         Validators.required,
-        Validators.pattern('^[0-9]+$')
+        //Validators.pattern('^[0-9]+$')
+        Validators.minLength(2)
       ]],
       'address': [this.contact.address, [
         Validators.required,

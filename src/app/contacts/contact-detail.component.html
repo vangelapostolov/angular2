@@ -4,57 +4,71 @@
 	<div class="form-group">
 		<label class="control-label col-xs-3 hidden-xs" for="id">ID:</label>
 		<div class="col-xs-12 col-sm-9">
-			<input [ngModel]="contact.id" id="id" name="id" disabled class="form-control">
+			<input id="id" name="id" disabled class="form-control">
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="control-label col-xs-3 hidden-xs" for="gender_M">Gender:</label>
 		<div class="col-xs-12 col-sm-9 col_radio">
-			<input [(ngModel)]="contact.gender" class="col-xs-12 col-sm-9" id="gender_M" name="gender" type="radio" value="MALE" 
-				required class="form-control">
+			<input class="col-xs-12 col-sm-9" id="gender_M" name="gender" type="radio" value="MALE" class="form-control">
 			<label class="control-label col-xs-3 hidden-xs" for="gender_M">Male</label>
 
-			<input [(ngModel)]="contact.gender" class="col-xs-12 col-sm-9" id="gender_F" name="gender" type="radio" value="FEMALE" 
-				required class="form-control">
+			<input class="col-xs-12 col-sm-9" id="gender_F" name="gender" type="radio" value="FEMALE" class="form-control">
 			<label class="control-label col-xs-3 hidden-xs" for="gender_F">Female</label>
+			<div *ngIf="formErrors.gender" class="alert alert-danger">
+				{{ formErrors.gender }}
+			</div>
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="control-label col-xs-3 hidden-xs" for="firstName">Name:</label>
 		<div class="col-xs-12 col-sm-9">
-			<input [(ngModel)]="contact.name" class="col-xs-12 col-sm-9" id="firstName" name="name" placeholder="Name"
-				required class="form-control">
+			<input class="col-xs-12 col-sm-9" id="firstName" name="name" placeholder="Name" class="form-control">
+		</div>
+		<div *ngIf="formErrors.name" class="alert alert-danger">
+			{{ formErrors.name }}
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="control-label col-xs-3 hidden-xs" for="lastName">Family:</label>
 		<div class="col-xs-12 col-sm-9">
-			<input [(ngModel)]="contact.family" class="col-xs-12 col-sm-9" id="lastName" name="family" placeholder="Family"
-				required class="form-control">
+			<input class="col-xs-12 col-sm-9" id="lastName" name="family" placeholder="Family" class="form-control">
+		</div>
+		<div *ngIf="formErrors.family" class="alert alert-danger">
+			{{ formErrors.family }}
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="control-label col-xs-3 hidden-xs" for="email">Email:</label>
 		<div class="col-xs-12 col-sm-9">
-			<input [(ngModel)]="contact.email" class="col-xs-12 col-sm-9" id="email" name="email"  placeholder="Email"
-				required pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" #email class="form-control">
+			<input class="col-xs-12 col-sm-9" id="email" name="email"  placeholder="Email" class="form-control">
+		</div>
+		<div *ngIf="formErrors.email" class="alert alert-danger">
+			{{ formErrors.email }}
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="control-label col-xs-3 hidden-xs" for="phone">Phone:</label>
 		<div class="col-xs-12 col-sm-9">
-			<input [(ngModel)]="contact.phone" class="col-xs-12 col-sm-9" id="phone" name="phone" placeholder="Phone"
-				required class="form-control">
+			<input class="col-xs-12 col-sm-9" id="phone" name="phone" placeholder="Phone" class="form-control">
+		</div>
+		<div *ngIf="formErrors.phone" class="alert alert-danger">
+			{{ formErrors.phone }}
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="control-label col-xs-3 hidden-xs" for="address">Address:</label>
 		<div class="col-xs-12 col-sm-9">
-			<textarea [(ngModel)]="contact.address" class="col-xs-12 col-sm-9" id="address" name="address" placeholder="Address"
-				required class="form-control"></textarea>
+			<textarea class="col-xs-12 col-sm-9" id="address" name="address" placeholder="Address" class="form-control"></textarea>
+		</div>
+		<div *ngIf="formErrors.address" class="alert alert-danger">
+			{{ formErrors.address }}
 		</div>
 	</div>
-	<button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Submit</button>
+	<button type="submit" class="btn btn-primary" 
+			[disabled]="!contactForm.valid"
+			>Submit</button>
 	<button type="button" class="btn btn-danger" (click)="resetForm()">Reset</button>
   	<button type="button" class="btn btn-default" (click)="goBack()">Cancel</button>
+	   {{ formErrors | json }}
 </form>
