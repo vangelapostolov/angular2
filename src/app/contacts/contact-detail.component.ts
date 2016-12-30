@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnChanges, SimpleChange } from '@angular/core';
 import { Location } from '@angular/common';
-import { Contact } from './contact.model';
+import { Contact, Gender } from './contact.model';
 import { ContactService } from './contact.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -71,6 +71,7 @@ export class ContactDetailComponent implements OnInit, OnChanges {
           contact => {
             this.contactMaster = contact;
             this.resetForm();
+console.log(this.contactMaster);
           });
       }
     });
@@ -84,11 +85,12 @@ export class ContactDetailComponent implements OnInit, OnChanges {
   }
 
   public resetForm() {
-    this.contact = Object.assign({}, this.contactMaster)
+    this.contact = Object.assign({}, this.contactMaster);
   }
 
   public buildForm(): void {
     this.isNewContact = !this.contact.id; // if contact doesn't have ID => it is a new contact 
+    
     this.contactForm = this.fb.group({
       'id': [{ value: this.contact.id, disabled: true }],
       'gender': [this.contact.gender, 
@@ -106,13 +108,11 @@ export class ContactDetailComponent implements OnInit, OnChanges {
       ]],
       'email': [this.contact.email, [
         Validators.required,
-        //Validators.pattern('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$')
-        Validators.minLength(2)
+        Validators.pattern('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$')
       ]],
       'phone': [this.contact.phone, [
         Validators.required,
-        //Validators.pattern('^[0-9]+$')
-        Validators.minLength(2)
+        Validators.pattern('^[0-9]+$')
       ]],
       'address': [this.contact.address, [
         Validators.required,
@@ -125,22 +125,31 @@ export class ContactDetailComponent implements OnInit, OnChanges {
       .subscribe(data => this.onStatusChanged(data));
 
     this.onStatusChanged(); // reset validation messages
+
   }
 
   public onSubmit() {
+console.log('onSubmit');
     this.contact = this.contactForm.getRawValue() as Contact;
+console.log('gender: '+this.contact.gender);
+    if(this.contact.gender == 1){
+      this.contact.gender = Gender.MALE;
+    }else{
+      this.contact.gender = Gender.FEMALE;
+    }
     if (this.isNewContact) {
        this.service.addContact(this.contact).then(contact => {
          this.contact = contact;
+console.log(this.contact);
          this.goBack();
        });
-/*
+
     } else {
        this.service.editContact(this.contact).then(contact => {
          this.contact = contact;
          this.goBack();
        });
-*/
+
     }
   }
 

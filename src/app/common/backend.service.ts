@@ -9,6 +9,8 @@ export abstract class BackendService {
   public abstract find(id: number): Promise<Contact>;
 
   public abstract add(item: Contact): Promise<Contact>;
+
+  public abstract edit<T extends Identifiable>(item: T): Promise<T>;
 /*
   public abstract find<T extends Identifiable>(contacts: Contact[], id: number): Promise<T>;
 

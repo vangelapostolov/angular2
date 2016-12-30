@@ -7,6 +7,8 @@ const contactMaleImage = require('../../assets/img/contact_m.png');
 const contactFemaleImage = require('../../assets/img/contact_f.png');
 
 import { Identifiable } from './../common/common.interfaces';
+import { Router } from '@angular/router';
+//import { Location } from '@angular/common';
 /*
 const CONTACTS: Contact[] = [
   new Contact('АНКА', 'ПЕТКОВА', Gender.FEMALE, 'anka@abv.bg', '123456', 'Кутузов 1'),
@@ -48,7 +50,12 @@ export class ContactListComponent implements OnInit {
   public contactMaleImage = contactMaleImage;
   public contactFemaleImage = contactFemaleImage;
 
-  constructor(private service: ContactService) { }
+  constructor(
+    private service: ContactService,
+    //private route: ActivatedRoute,
+    private router: Router
+    //private location: Location
+    ) { }
 
   public ngOnInit() {
     this.service.getContacts().then(
@@ -60,4 +67,11 @@ export class ContactListComponent implements OnInit {
   }
 
   //public selectItem(contact: Contact) { this.selectedContact = contact; }
+  public selectItem(contact: Contact) { 
+    this.selectedContact = contact;
+    this.router.navigateByUrl("contact/"+contact.id);
+console.log('id: '+contact.id);
+  }
+  
+
 }

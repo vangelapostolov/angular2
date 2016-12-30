@@ -29,6 +29,10 @@ export class ContactService {
   public addContact(contact: Contact): Promise<Contact> {
     return this.backend.add(contact);
   }
+
+  public editContact(contact: Contact): Promise<Contact> {
+    return this.backend.edit(contact);
+  }
 /*
   public editContact(Contact: contact): Promise<Contact> {
     return this.backend.edit(Contact, contact);

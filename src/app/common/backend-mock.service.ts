@@ -38,6 +38,23 @@ export class BackendMockService implements BackendService {
     return collection.reduce((prevMaxId, next) =>
       next.id > prevMaxId ? next.id : prevMaxId, 0) + 1;
   }
+  
+  public edit<T extends Identifiable>(item: T): Promise<T> {
+    let isSuccessful = false;
+    let err = new Error(`Cannot edit the contact!`);
+    isSuccessful = this.mergeItem(CONTACTS, item);
+    return isSuccessful ? Promise.resolve<T>(item) : Promise.reject<T>(err);
+  }
+
+  private mergeItem(collection: Identifiable[], item: Identifiable): boolean {
+    for (let i = 0; i < collection.length; i++) {
+      if (collection[i].id === item.id) {
+        collection[i] = item;
+        return true;
+      }
+    }
+    return false;
+  }
 /*
   public edit<T extends Identifiable>(contacts: Contact[], item: T): Promise<T> {
     let isSuccessful = false;

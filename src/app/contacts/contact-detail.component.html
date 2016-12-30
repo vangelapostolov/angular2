@@ -10,10 +10,10 @@
 	<div class="form-group">
 		<label class="control-label col-xs-3 hidden-xs" for="gender_M">Gender:</label>
 		<div class="col-xs-12 col-sm-9 col_radio">
-			<input class="col-xs-12 col-sm-9" id="gender_M" name="gender" type="radio" value="MALE" class="form-control">
+			<input class="col-xs-12 col-sm-9" id="gender_M" name="gender" formControlName="gender" type="radio" value="1" class="form-control">
 			<label class="control-label col-xs-3 hidden-xs" for="gender_M">Male</label>
 
-			<input class="col-xs-12 col-sm-9" id="gender_F" name="gender" type="radio" value="FEMALE" class="form-control">
+			<input class="col-xs-12 col-sm-9" id="gender_F" name="gender" formControlName="gender" type="radio" value="0" class="form-control">
 			<label class="control-label col-xs-3 hidden-xs" for="gender_F">Female</label>
 			<div *ngIf="formErrors.gender" class="alert alert-danger">
 				{{ formErrors.gender }}
@@ -23,7 +23,7 @@
 	<div class="form-group">
 		<label class="control-label col-xs-3 hidden-xs" for="firstName">Name:</label>
 		<div class="col-xs-12 col-sm-9">
-			<input class="col-xs-12 col-sm-9" id="firstName" name="name" placeholder="Name" class="form-control">
+			<input class="col-xs-12 col-sm-9" id="firstName" name="name" formControlName="name" placeholder="Name" class="form-control">
 		</div>
 		<div *ngIf="formErrors.name" class="alert alert-danger">
 			{{ formErrors.name }}
@@ -32,7 +32,7 @@
 	<div class="form-group">
 		<label class="control-label col-xs-3 hidden-xs" for="lastName">Family:</label>
 		<div class="col-xs-12 col-sm-9">
-			<input class="col-xs-12 col-sm-9" id="lastName" name="family" placeholder="Family" class="form-control">
+			<input class="col-xs-12 col-sm-9" id="lastName" name="family" formControlName="family" placeholder="Family" class="form-control">
 		</div>
 		<div *ngIf="formErrors.family" class="alert alert-danger">
 			{{ formErrors.family }}
@@ -41,7 +41,7 @@
 	<div class="form-group">
 		<label class="control-label col-xs-3 hidden-xs" for="email">Email:</label>
 		<div class="col-xs-12 col-sm-9">
-			<input class="col-xs-12 col-sm-9" id="email" name="email"  placeholder="Email" class="form-control">
+			<input class="col-xs-12 col-sm-9" id="email" name="email" formControlName="email" placeholder="Email" class="form-control">
 		</div>
 		<div *ngIf="formErrors.email" class="alert alert-danger">
 			{{ formErrors.email }}
@@ -50,7 +50,7 @@
 	<div class="form-group">
 		<label class="control-label col-xs-3 hidden-xs" for="phone">Phone:</label>
 		<div class="col-xs-12 col-sm-9">
-			<input class="col-xs-12 col-sm-9" id="phone" name="phone" placeholder="Phone" class="form-control">
+			<input class="col-xs-12 col-sm-9" id="phone" name="phone" formControlName="phone" placeholder="Phone" class="form-control">
 		</div>
 		<div *ngIf="formErrors.phone" class="alert alert-danger">
 			{{ formErrors.phone }}
@@ -59,7 +59,7 @@
 	<div class="form-group">
 		<label class="control-label col-xs-3 hidden-xs" for="address">Address:</label>
 		<div class="col-xs-12 col-sm-9">
-			<textarea class="col-xs-12 col-sm-9" id="address" name="address" placeholder="Address" class="form-control"></textarea>
+			<textarea class="col-xs-12 col-sm-9" id="address" name="address" formControlName="address" placeholder="Address" class="form-control"></textarea>
 		</div>
 		<div *ngIf="formErrors.address" class="alert alert-danger">
 			{{ formErrors.address }}
