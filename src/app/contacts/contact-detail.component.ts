@@ -71,7 +71,7 @@ export class ContactDetailComponent implements OnInit, OnChanges {
           contact => {
             this.contactMaster = contact;
             this.resetForm();
-console.log(this.contactMaster);
+            this.buildForm();
           });
       }
     });
@@ -129,9 +129,7 @@ console.log(this.contactMaster);
   }
 
   public onSubmit() {
-console.log('onSubmit');
     this.contact = this.contactForm.getRawValue() as Contact;
-console.log('gender: '+this.contact.gender);
     if(this.contact.gender == 1){
       this.contact.gender = Gender.MALE;
     }else{
@@ -140,7 +138,6 @@ console.log('gender: '+this.contact.gender);
     if (this.isNewContact) {
        this.service.addContact(this.contact).then(contact => {
          this.contact = contact;
-console.log(this.contact);
          this.goBack();
        });
 
