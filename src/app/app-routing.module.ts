@@ -8,7 +8,6 @@ import { HomeComponent } from './home/home.component';
   imports: [
     RouterModule.forRoot([
       { path: '', redirectTo: '/home', pathMatch: 'full' },
-      //{ path: '', redirectTo: '/contacts', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'contacts', component: ContactListComponent }
     ])

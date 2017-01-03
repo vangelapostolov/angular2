@@ -16,63 +16,63 @@ export class BackendHttpService implements BackendService {
     private http: Http,
     private logger: Logger) { }
 
-  public findAll<T extends Identifiable>(contact: Contact): Promise<T[]> {
-    let collection = type.name.toLowerCase() + 's';
-    return this.http.get(this.baseUrl + '/' + collection)
-      .map(response => response.json().data as T[])
-      //.do((items: User[]) => this.logger.log(`Fetched ${items.length} ${collection}.`))
+  public findAll(): Promise<Contact[]> {
+    return this.http.get(this.baseUrl + '/contacts')
+      .map(response => response.json().data as Contact[])
       .catch(this.handleErrorObservable)
       .toPromise();
   }
 
-  public find<T extends Identifiable>(contact: Contact, id: number): Promise<T> {
-    return this.findAll<T>(type).then(
+  public find(id: number): Promise<Contact> {
+    return this.findAll().then(
       items => items.filter(item => item.id === id)[0]
-    );
+    ).catch(err => {
+      throw new Error(`Cannot find contact with id: ${id}`);
+    });
   }
 
-  public add<T extends Identifiable>(contact: Contact, item: T): Promise<T> {
-        item.id = this.getNextId(CONTACTS);
-        CONTACTS.push(item);
-        return Promise.resolve(item);
+  public add(item: Contact): Promise<Contact> {
+    return this.http.post(this.baseUrl + '/contacts', JSON.stringify(item), this.options)
+      .toPromise()
+      .then(res => res.json().data)
+      .then(itemData => {
+        return itemData;
+      }).catch(this.handleErrorPromise);
   }
 
-  public edit<T extends Identifiable>(contact: Contact, item: T): Promise<T> {
-    let isSuccessful = false;
-    let err = new Error(`Cannot edit the contact!`);
-    isSuccessful = this.mergeItem(CONTACTS, item);
-    return isSuccessful ? Promise.resolve(item) : Promise.reject<T>(err);
+  public edit<T extends Identifiable>(item: T): Promise<T> {
+    return this.http.put(this.baseUrl + '/contact/' + item.id, JSON.stringify(item), this.options)
+      .toPromise()
+      .then(() => {
+        return item;
+      }).catch(this.handleErrorPromise);
   }
 
- public delete<T extends Identifiable>(contact: Contact, itemId: number): Promise<T> {
-    let deleted: T | undefined = undefined;
-    let err = new Error(`Cannot delete the contact!`);
-    deleted = this.deleteItem(<T[]> CONTACTS, itemId);
-    return deleted ? Promise.resolve(deleted) : Promise.reject<T>(err);
+ public delete<T extends Identifiable>(itemId: number): Promise<boolean> {
+    return this.http.delete(this.baseUrl + '/contact/' + itemId)
+      .toPromise()
+      .then(response => {
+        return;
+      }).catch(this.handleErrorPromise);
   }
 
-  private getNextId(collection: Identifiable[]): number {
-    return collection.reduce((prevMaxId, next) =>
-      next.id > prevMaxId ? next.id : prevMaxId, 0) + 1;
-  }
-
-  private mergeItem(collection: Identifiable[], item: Identifiable): boolean {
-    for (let i = 0; i < collection.length; i++) {
-      if (collection[i].id === item.id) {
-        collection[i] = item;
-        return true;
-      }
+  private handleErrorObservable(error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
     }
-    return false;
+    // in a real world app, we may send the error to some remote logging infrastructure
+    console.error(errMsg);
+    return Observable.throw(errMsg);
   }
 
-  private deleteItem <T extends Identifiable> (collection: T[], id: number): T | undefined {
-    for (let i = 0; i < collection.length; i++) {
-      if (collection[i].id === id) {
-        return collection.splice(i, 1)[0]; // delete the current element and return deleted
-      }
-    }
-    return undefined;
+  private handleErrorPromise(error: any) {
+    // in a real world app, we may send the error to some remote logging infrastructure
+    console.error(error);
+    return Promise.reject(error.message || error.json().error || 'Server error');
   }
-
 }

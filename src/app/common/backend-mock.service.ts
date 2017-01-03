@@ -55,38 +55,21 @@ export class BackendMockService implements BackendService {
     }
     return false;
   }
-/*
-  public edit<T extends Identifiable>(contacts: Contact[], item: T): Promise<T> {
-    let isSuccessful = false;
-    let err = new Error(`Cannot edit the contact!`);
-    isSuccessful = this.mergeItem(CONTACTS, item);
-    return isSuccessful ? Promise.resolve(item) : Promise.reject<T>(err);
-  }
 
- public delete<T extends Identifiable>(contacts: Contact[], itemId: number): Promise<T> {
-    let deleted: T | undefined = undefined;
+  public delete<T extends Identifiable>(itemId: number): Promise<boolean> {
+    let deleted: boolean = false;
     let err = new Error(`Cannot delete the contact!`);
-    deleted = this.deleteItem(<T[]> CONTACTS, itemId);
-    return deleted ? Promise.resolve(deleted) : Promise.reject<T>(err);
+    deleted = this.deleteItem(CONTACTS, itemId);
+    return deleted ? Promise.resolve(deleted) : Promise.reject<boolean>(err);
   }
 
-  private mergeItem(collection: Identifiable[], item: Identifiable): boolean {
+  private deleteItem(collection: Identifiable[], id: number): boolean {
     for (let i = 0; i < collection.length; i++) {
-      if (collection[i].id === item.id) {
-        collection[i] = item;
+      if (collection[i].id === id) {
+        collection.splice(i, 1)[0]; // delete the current element and return deleted
         return true;
       }
     }
     return false;
   }
-
-  private deleteItem <T extends Identifiable> (collection: T[], id: number): T | undefined {
-    for (let i = 0; i < collection.length; i++) {
-      if (collection[i].id === id) {
-        return collection.splice(i, 1)[0]; // delete the current element and return deleted
-      }
-    }
-    return undefined;
-  }
-*/
 }

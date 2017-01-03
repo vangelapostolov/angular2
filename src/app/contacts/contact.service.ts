@@ -33,13 +33,8 @@ export class ContactService {
   public editContact(contact: Contact): Promise<Contact> {
     return this.backend.edit(contact);
   }
-/*
-  public editContact(Contact: contact): Promise<Contact> {
-    return this.backend.edit(Contact, contact);
-  }
 
-  public deleteContact(contactId: number): Promise<Contact> {
-    return this.backend.delete(Contact, contactId);
+  public deleteContact(contactId: number): Promise<boolean> {
+    return this.backend.delete(contactId);
   }
-  */
 }

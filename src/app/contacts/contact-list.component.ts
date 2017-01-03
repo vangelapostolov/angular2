@@ -8,17 +8,6 @@ const contactFemaleImage = require('../../assets/img/contact_f.png');
 
 import { Identifiable } from './../common/common.interfaces';
 import { Router } from '@angular/router';
-//import { Location } from '@angular/common';
-/*
-const CONTACTS: Contact[] = [
-  new Contact('АНКА', 'ПЕТКОВА', Gender.FEMALE, 'anka@abv.bg', '123456', 'Кутузов 1'),
-  new Contact('ВАСИЛ', 'ЖЕЛЯЗКОВ', Gender.MALE, 'vasil@abv.bg', '123456', 'Никола Обретенов 23'),
-  new Contact('ДАМЯН', 'ИЛИЕВ', Gender.MALE, 'damqn@yahoo.com', '123456', 'Борисова 31'),
-  new Contact('ДИМИТЪР', 'СЛАВЧЕВ', Gender.MALE, 'mitko@yahoo.com', '123456', 'Александровска 2'),
-  new Contact('ДОРОТЕЯ', 'НИКОЛОВА', Gender.FEMALE, 'dori@gmail.com', '123456', 'Цар Освободител 13'),
-  new Contact('ПЕНКА', 'ЦОНЕВА', Gender.FEMALE, 'pepa@gmail.com', '123456', 'Ленин 45')
-];
-*/
 
 @Component({
   //moduleId: module.id,
@@ -52,9 +41,7 @@ export class ContactListComponent implements OnInit {
 
   constructor(
     private service: ContactService,
-    //private route: ActivatedRoute,
     private router: Router
-    //private location: Location
     ) { }
 
   public ngOnInit() {
@@ -63,14 +50,11 @@ export class ContactListComponent implements OnInit {
     ).catch(err => {
       throw new Error(`Cannot get contacts!`);
     });
-    //this.contacts = CONTACTS;
   }
 
-  //public selectItem(contact: Contact) { this.selectedContact = contact; }
   public selectItem(contact: Contact) { 
     this.selectedContact = contact;
     this.router.navigateByUrl("contact/"+contact.id);
-console.log('id: '+contact.id);
   }
   
 

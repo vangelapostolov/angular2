@@ -171,4 +171,16 @@ export class ContactDetailComponent implements OnInit, OnChanges {
       }
     }
   }
+
+  public deleteContact() {
+    this.service.deleteContact(this.contact.id).then(result => {
+      if(result){
+        alert('Contact Successfull Deleted!');
+      }else{
+        alert('Error on Contact Deleted!');
+      }
+      this.router.navigateByUrl("contacts");
+    });
+  }
+
 }
