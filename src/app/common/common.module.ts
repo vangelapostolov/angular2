@@ -2,7 +2,7 @@ import { BrowserModule }       from '@angular/platform-browser';
 import { NgModule }           from '@angular/core';
 import { BackendService }      from './backend.service';
 import { Logger }              from './logger.service';
-//import { BackendHttpService } from './backend-http.service';
+import { BackendHttpService } from './backend-http.service';
 import { HttpModule }    from '@angular/http';
 import { OpaqueToken } from '@angular/core';
 import { BackendMockService } from './backend-mock.service';

@@ -5,6 +5,7 @@ import { Contact, Gender } from './../contacts/contact.model';
 import { Identifiable } from './common.interfaces';
 import { BackendService } from './backend.service';
 import { Headers, Http, RequestOptions, Response} from '@angular/http'
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class BackendHttpService implements BackendService {
@@ -52,7 +53,7 @@ export class BackendHttpService implements BackendService {
     return this.http.delete(this.baseUrl + '/contact/' + itemId)
       .toPromise()
       .then(response => {
-        return;
+        return true;
       }).catch(this.handleErrorPromise);
   }
 
