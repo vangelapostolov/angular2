@@ -42,7 +42,7 @@ export class BackendHttpService implements BackendService {
   }
 
   public edit<T extends Identifiable>(item: T): Promise<T> {
-    return this.http.put(this.baseUrl + '/contact/' + item.id, JSON.stringify(item), this.options)
+    return this.http.put(this.baseUrl + '/contacts/' + item.id, JSON.stringify(item), this.options)
       .toPromise()
       .then(() => {
         return item;
@@ -50,7 +50,7 @@ export class BackendHttpService implements BackendService {
   }
 
  public delete<T extends Identifiable>(itemId: number): Promise<boolean> {
-    return this.http.delete(this.baseUrl + '/contact/' + itemId)
+    return this.http.delete(this.baseUrl + '/contacts/' + itemId)
       .toPromise()
       .then(response => {
         return true;
